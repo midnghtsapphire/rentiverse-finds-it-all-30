@@ -84,7 +84,7 @@ const FeaturedListings = () => {
                   className="w-full h-full object-cover"
                 />
                 <Badge 
-                  className={`absolute top-3 left-3 bg-${listing.categoryColor} hover:bg-${listing.categoryColor}`}
+                  className={`absolute top-3 left-3`}
                   style={{ 
                     backgroundColor: `var(--${listing.categoryColor}, #9b87f5)`
                   }}
@@ -115,7 +115,16 @@ const FeaturedListings = () => {
                   onClick={() => handleRentNow(listing.title)}
                   className="w-full bg-primary hover:bg-primary/90"
                 >
-                  Rent Now
+                  <div className="flex items-center justify-center w-full">
+                    <div className="h-5 w-5 rounded-full overflow-hidden mr-2">
+                      <img 
+                        src={listing.image} 
+                        alt="Thumbnail" 
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <span>Rent Now</span>
+                  </div>
                 </Button>
               </CardFooter>
             </Card>
