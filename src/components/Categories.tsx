@@ -1,90 +1,97 @@
 
-import { 
-  Dog, ShoppingBag, Sofa, Flower, Truck, Hammer,
-  Tractor, Camera, Mic, Waves,
-  Castle, Image, Music,
-  Compass, Sparkles
-} from "lucide-react";
+import { Sparkles } from "lucide-react";
+
+// Define category images
+const categoryImages = {
+  fashion: "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=200&auto=format",
+  pets: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=200&auto=format",
+  furniture: "https://images.unsplash.com/photo-1538688423619-a81d3f23454b?q=80&w=200&auto=format",
+  equipment: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=200&auto=format",
+  events: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=200&auto=format",
+  media: "https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?q=80&w=200&auto=format",
+  lifestyle: "https://images.unsplash.com/photo-1560807707-8cc77767d783?q=80&w=200&auto=format",
+  unique: "https://images.unsplash.com/photo-1554941068-a252680d25d3?q=80&w=200&auto=format"
+};
 
 const categoryGroups = [
   {
     name: "Fashion & Beauty",
     color: "fashion",
     items: [
-      { name: "Dresses", icon: <ShoppingBag size={36} /> },
-      { name: "Purses", icon: <ShoppingBag size={36} /> },
-      { name: "Glasses", icon: <ShoppingBag size={36} /> },
-      { name: "Jewelry", icon: <ShoppingBag size={36} /> },
+      { name: "Dresses", image: categoryImages.fashion },
+      { name: "Purses", image: categoryImages.fashion },
+      { name: "Glasses", image: categoryImages.fashion },
+      { name: "Jewelry", image: categoryImages.fashion },
     ]
   },
   {
     name: "Pets & Animals",
     color: "pets",
     items: [
-      { name: "Goats", icon: <Dog size={36} /> },
-      { name: "Mini Pigs", icon: <Dog size={36} /> },
-      { name: "Therapy Dogs", icon: <Dog size={36} /> },
-      { name: "Parrots", icon: <Dog size={36} /> },
+      { name: "Goats", image: categoryImages.pets },
+      { name: "Mini Pigs", image: categoryImages.pets },
+      { name: "Therapy Dogs", image: categoryImages.pets },
+      { name: "Parrots", image: categoryImages.pets },
     ]
   },
   {
     name: "Furniture & Decor",
     color: "furniture",
     items: [
-      { name: "Couches", icon: <Sofa size={36} /> },
-      { name: "Art", icon: <Sofa size={36} /> },
-      { name: "Plants", icon: <Flower size={36} /> },
-      { name: "Chandeliers", icon: <Sofa size={36} /> },
+      { name: "Couches", image: categoryImages.furniture },
+      { name: "Art", image: categoryImages.furniture },
+      { name: "Plants", image: categoryImages.furniture },
+      { name: "Chandeliers", image: categoryImages.furniture },
     ]
   },
   {
     name: "Heavy Equipment",
     color: "equipment",
     items: [
-      { name: "Excavators", icon: <Tractor size={36} /> },
-      { name: "Trailers", icon: <Truck size={36} /> },
-      { name: "Augers", icon: <Tractor size={36} /> },
-      { name: "Concrete Mixers", icon: <Hammer size={36} /> },
+      { name: "Excavators", image: categoryImages.equipment },
+      { name: "Trailers", image: categoryImages.equipment },
+      { name: "Augers", image: categoryImages.equipment },
+      { name: "Concrete Mixers", image: categoryImages.equipment },
     ]
   },
   {
     name: "Events & Entertainment",
     color: "events",
     items: [
-      { name: "Bounce Houses", icon: <Castle size={36} /> },
-      { name: "Photo Booths", icon: <Image size={36} /> },
-      { name: "Karaoke Machines", icon: <Music size={36} /> },
-      { name: "Party Equipment", icon: <Compass size={36} /> },
+      { name: "Bounce Houses", image: categoryImages.events },
+      { name: "Photo Booths", image: categoryImages.events },
+      { name: "Karaoke Machines", image: categoryImages.events },
+      { name: "Party Equipment", image: categoryImages.events },
     ]
   },
   {
     name: "Media Gear",
     color: "media",
     items: [
-      { name: "DSLRs", icon: <Camera size={36} /> },
-      { name: "Ring Lights", icon: <Camera size={36} /> },
-      { name: "Podcast Kits", icon: <Mic size={36} /> },
-      { name: "Green Screens", icon: <Camera size={36} /> },
+      { name: "DSLRs", image: categoryImages.media },
+      { name: "Ring Lights", image: categoryImages.media },
+      { name: "Podcast Kits", image: categoryImages.media },
+      { name: "Green Screens", image: categoryImages.media },
     ]
   },
   {
     name: "Lifestyle",
     color: "lifestyle",
     items: [
-      { name: "Surfboards", icon: <Waves size={36} /> },
-      { name: "Hot Tubs", icon: <Compass size={36} /> },
-      { name: "Tiny Cabins", icon: <Compass size={36} /> },
-      { name: "Glamping Gear", icon: <Compass size={36} /> },
+      { name: "Surfboards", image: categoryImages.lifestyle },
+      { name: "Hot Tubs", image: categoryImages.lifestyle },
+      { name: "Tiny Cabins", image: categoryImages.lifestyle },
+      { name: "Glamping Gear", image: categoryImages.lifestyle },
     ]
   },
   {
     name: "Unique Experiences",
     color: "unique",
     items: [
-      { name: "Beekeeper for a Day", icon: <Sparkles size={36} /> },
-      { name: "UFO Detectors", icon: <Sparkles size={36} /> },
-      { name: "Psychic Reading", icon: <Sparkles size={36} /> },
-      { name: "Unusual Rentals", icon: <Sparkles size={36} /> },
+      { name: "Beekeeper for a Day", image: categoryImages.unique },
+      { name: "UFO Detectors", image: categoryImages.unique },
+      { name: "Psychic Reading", image: categoryImages.unique },
+      { name: "Unusual Rentals", image: categoryImages.unique },
     ]
   },
 ];
@@ -117,13 +124,14 @@ const Categories = () => {
                     borderColor: `var(--${group.color}, #9b87f5)30`
                   }}
                 >
-                  <div 
-                    className={`absolute inset-0 flex items-center justify-center text-${group.color}`}
-                    style={{ color: `var(--${group.color}, #9b87f5)` }}
-                  >
-                    {item.icon}
+                  <div className="absolute inset-0 overflow-hidden">
+                    <img 
+                      src={item.image} 
+                      alt={item.name} 
+                      className="w-full h-full object-cover opacity-60"
+                    />
                   </div>
-                  <div className="mt-auto backdrop-blur-sm bg-white/80 -mx-6 -mb-6 px-6 py-3 border-t border-gray-200">
+                  <div className="mt-auto backdrop-blur-sm bg-white/80 -mx-6 -mb-6 px-6 py-3 border-t border-gray-200 relative z-10">
                     <h4 className="font-semibold">{item.name}</h4>
                   </div>
                 </a>
