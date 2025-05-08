@@ -1,9 +1,9 @@
 
 import { 
-  Dog, Purse, Couch, Plant, Trailer, ConcreteMixer,
-  Excavator, Camera, PodcastIcon, Surfboard,
-  BounceHouse, PhotoBooth, KaraokeMachine,
-  Compass, Surprise
+  Dog, ShoppingBag, Sofa, Flower, Truck, Hammer,
+  Tractor, Camera, Mic, Waves,
+  Castle, Image, Music,
+  Compass, Sparkles
 } from "lucide-react";
 
 const categoryGroups = [
@@ -11,10 +11,10 @@ const categoryGroups = [
     name: "Fashion & Beauty",
     color: "fashion",
     items: [
-      { name: "Dresses", icon: <Purse size={36} /> },
-      { name: "Purses", icon: <Purse size={36} /> },
-      { name: "Glasses", icon: <Purse size={36} /> },
-      { name: "Jewelry", icon: <Purse size={36} /> },
+      { name: "Dresses", icon: <ShoppingBag size={36} /> },
+      { name: "Purses", icon: <ShoppingBag size={36} /> },
+      { name: "Glasses", icon: <ShoppingBag size={36} /> },
+      { name: "Jewelry", icon: <ShoppingBag size={36} /> },
     ]
   },
   {
@@ -31,29 +31,29 @@ const categoryGroups = [
     name: "Furniture & Decor",
     color: "furniture",
     items: [
-      { name: "Couches", icon: <Couch size={36} /> },
-      { name: "Art", icon: <Couch size={36} /> },
-      { name: "Plants", icon: <Plant size={36} /> },
-      { name: "Chandeliers", icon: <Couch size={36} /> },
+      { name: "Couches", icon: <Sofa size={36} /> },
+      { name: "Art", icon: <Sofa size={36} /> },
+      { name: "Plants", icon: <Flower size={36} /> },
+      { name: "Chandeliers", icon: <Sofa size={36} /> },
     ]
   },
   {
     name: "Heavy Equipment",
     color: "equipment",
     items: [
-      { name: "Excavators", icon: <Excavator size={36} /> },
-      { name: "Trailers", icon: <Trailer size={36} /> },
-      { name: "Augers", icon: <Excavator size={36} /> },
-      { name: "Concrete Mixers", icon: <ConcreteMixer size={36} /> },
+      { name: "Excavators", icon: <Tractor size={36} /> },
+      { name: "Trailers", icon: <Truck size={36} /> },
+      { name: "Augers", icon: <Tractor size={36} /> },
+      { name: "Concrete Mixers", icon: <Hammer size={36} /> },
     ]
   },
   {
     name: "Events & Entertainment",
     color: "events",
     items: [
-      { name: "Bounce Houses", icon: <BounceHouse size={36} /> },
-      { name: "Photo Booths", icon: <PhotoBooth size={36} /> },
-      { name: "Karaoke Machines", icon: <KaraokeMachine size={36} /> },
+      { name: "Bounce Houses", icon: <Castle size={36} /> },
+      { name: "Photo Booths", icon: <Image size={36} /> },
+      { name: "Karaoke Machines", icon: <Music size={36} /> },
       { name: "Party Equipment", icon: <Compass size={36} /> },
     ]
   },
@@ -63,7 +63,7 @@ const categoryGroups = [
     items: [
       { name: "DSLRs", icon: <Camera size={36} /> },
       { name: "Ring Lights", icon: <Camera size={36} /> },
-      { name: "Podcast Kits", icon: <PodcastIcon size={36} /> },
+      { name: "Podcast Kits", icon: <Mic size={36} /> },
       { name: "Green Screens", icon: <Camera size={36} /> },
     ]
   },
@@ -71,7 +71,7 @@ const categoryGroups = [
     name: "Lifestyle",
     color: "lifestyle",
     items: [
-      { name: "Surfboards", icon: <Surfboard size={36} /> },
+      { name: "Surfboards", icon: <Waves size={36} /> },
       { name: "Hot Tubs", icon: <Compass size={36} /> },
       { name: "Tiny Cabins", icon: <Compass size={36} /> },
       { name: "Glamping Gear", icon: <Compass size={36} /> },
@@ -81,10 +81,10 @@ const categoryGroups = [
     name: "Unique Experiences",
     color: "unique",
     items: [
-      { name: "Beekeeper for a Day", icon: <Surprise size={36} /> },
-      { name: "UFO Detectors", icon: <Surprise size={36} /> },
-      { name: "Psychic Reading", icon: <Surprise size={36} /> },
-      { name: "Unusual Rentals", icon: <Surprise size={36} /> },
+      { name: "Beekeeper for a Day", icon: <Sparkles size={36} /> },
+      { name: "UFO Detectors", icon: <Sparkles size={36} /> },
+      { name: "Psychic Reading", icon: <Sparkles size={36} /> },
+      { name: "Unusual Rentals", icon: <Sparkles size={36} /> },
     ]
   },
 ];
@@ -114,11 +114,7 @@ const Categories = () => {
                   className={`category-card bg-${group.color}/10 hover:bg-${group.color}/20 border-2 border-${group.color}/30 hover:border-${group.color}`}
                   style={{ 
                     backgroundColor: `var(--${group.color}, #9b87f5)10`,
-                    borderColor: `var(--${group.color}, #9b87f5)30`,
-                    "&:hover": {
-                      backgroundColor: `var(--${group.color}, #9b87f5)20`,
-                      borderColor: `var(--${group.color}, #9b87f5)`
-                    }
+                    borderColor: `var(--${group.color}, #9b87f5)30`
                   }}
                 >
                   <div 

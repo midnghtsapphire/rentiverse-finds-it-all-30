@@ -86,8 +86,7 @@ const FeaturedListings = () => {
                 <Badge 
                   className={`absolute top-3 left-3 bg-${listing.categoryColor} hover:bg-${listing.categoryColor}`}
                   style={{ 
-                    backgroundColor: `var(--${listing.categoryColor}, #9b87f5)`,
-                    "&:hover": { backgroundColor: `var(--${listing.categoryColor}, #9b87f5)` }
+                    backgroundColor: `var(--${listing.categoryColor}, #9b87f5)`
                   }}
                 >
                   {listing.category}
