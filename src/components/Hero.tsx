@@ -1,0 +1,107 @@
+
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Search, Sparkles } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
+
+const Hero = () => {
+  const [zipCode, setZipCode] = useState("");
+  const { toast } = useToast();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (zipCode.trim().length === 0) {
+      toast({
+        title: "Please enter a location",
+        description: "Enter a ZIP code or city to continue",
+      });
+      return;
+    }
+    // In a real application, this would trigger a search
+    toast({
+      title: "Searching for rentals",
+      description: `Finding everything rentable near ${zipCode}`,
+    });
+  };
+
+  const handleSurpriseMe = () => {
+    toast({
+      title: "🎉 Surprise Feature!",
+      description: "We're finding something unexpected for you to rent nearby!",
+    });
+  };
+
+  return (
+    <div className="relative w-full">
+      {/* Background with overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-fashion/30 to-unique/30 z-0"></div>
+      
+      {/* Decorative circles */}
+      <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-events/20 blur-3xl"></div>
+      <div className="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-fashion/20 blur-3xl"></div>
+      
+      <div className="container mx-auto px-4 py-16 md:py-24 relative z-10">
+        <div className="max-w-3xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <span className="gradient-text">Discover the Universe of</span>
+            <br />
+            <span>All Things Rentable</span>
+          </h1>
+          
+          <p className="text-lg md:text-xl text-gray-700 mb-10">
+            From designer dresses to farm goats, mobile saunas to podcast studios,
+            <br className="hidden md:block" />
+            find everything rentable near you.
+          </p>
+          
+          <form onSubmit={handleSearch} className="max-w-lg mx-auto mb-8">
+            <div className="flex">
+              <Input 
+                type="text"
+                placeholder="Enter ZIP code or city"
+                className="rounded-r-none text-lg py-6"
+                value={zipCode}
+                onChange={(e) => setZipCode(e.target.value)}
+              />
+              <Button 
+                type="submit"
+                size="lg" 
+                className="rounded-l-none bg-primary hover:bg-primary/90 text-white px-6 py-6"
+              >
+                <Search className="mr-2" />
+                Search
+              </Button>
+            </div>
+          </form>
+          
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button 
+              variant="outline" 
+              className="border-2 border-primary/50 hover:bg-primary/10 hover:text-primary px-6 py-6 h-auto text-lg"
+              onClick={() => {
+                // This would use browser geolocation in a real app
+                toast({
+                  title: "Using your location",
+                  description: "Finding rentals near your current location...",
+                });
+              }}
+            >
+              Use My Location 🌍
+            </Button>
+            
+            <Button 
+              className="bg-unique hover:bg-unique/90 text-white px-6 py-6 h-auto text-lg"
+              onClick={handleSurpriseMe}
+            >
+              <Sparkles className="mr-2" />
+              Surprise Me! ✨
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Hero;
