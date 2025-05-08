@@ -1,5 +1,6 @@
 
 import { Sparkles } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 // Define category images
 const categoryImages = {
@@ -97,6 +98,15 @@ const categoryGroups = [
 ];
 
 const Categories = () => {
+  const { toast } = useToast();
+  
+  const handleCategoryClick = (category: string) => {
+    toast({
+      title: "Category Selected",
+      description: `You clicked on the ${category} category. Showing related rentals.`,
+    });
+  };
+
   return (
     <div className="container mx-auto px-4 py-16">
       <h2 className="text-3xl md:text-4xl font-bold mb-2 text-center">Browse by Category</h2>
@@ -116,9 +126,9 @@ const Categories = () => {
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
               {group.items.map((item) => (
                 <a 
-                  href="#" 
+                  onClick={() => handleCategoryClick(item.name)}
                   key={item.name} 
-                  className={`category-card bg-${group.color}/10 hover:bg-${group.color}/20 border-2 border-${group.color}/30 hover:border-${group.color}`}
+                  className={`relative category-card bg-${group.color}/10 hover:bg-${group.color}/20 border-2 border-${group.color}/30 hover:border-${group.color} cursor-pointer`}
                   style={{ 
                     backgroundColor: `var(--${group.color}, #9b87f5)10`,
                     borderColor: `var(--${group.color}, #9b87f5)30`

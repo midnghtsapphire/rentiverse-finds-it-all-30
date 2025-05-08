@@ -25,19 +25,59 @@ const Hero = () => {
     });
   };
 
-  const handleSurpriseMe = () => {
+  const handleUseMyLocation = () => {
     toast({
-      title: "🎉 Surprise Feature!",
-      description: "We're finding something unexpected for you to rent nearby!",
+      title: "Using your location",
+      description: "Finding rentals near your current location...",
+    });
+    
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          toast({
+            title: "Location detected",
+            description: `Latitude: ${position.coords.latitude.toFixed(2)}, Longitude: ${position.coords.longitude.toFixed(2)}`,
+          });
+        },
+        () => {
+          toast({
+            title: "Location access denied",
+            description: "Please enable location services or enter your ZIP code manually",
+            variant: "destructive"
+          });
+        }
+      );
+    } else {
+      toast({
+        title: "Geolocation not supported",
+        description: "Your browser doesn't support geolocation. Please enter your ZIP code manually",
+        variant: "destructive"
+      });
+    }
+  };
+
+  const handleSurpriseMe = () => {
+    const surprises = [
+      "Mobile hot tubs for your backyard",
+      "Professional karaoke equipment for your party",
+      "Goats for lawn maintenance",
+      "Designer dresses for your event",
+      "UFO detectors for your next camping trip",
+      "Mini excavators for your garden project"
+    ];
+    
+    const randomSurprise = surprises[Math.floor(Math.random() * surprises.length)];
+    
+    toast({
+      title: "🎉 Surprise Found!",
+      description: `We found something unexpected: ${randomSurprise}`,
     });
   };
 
   return (
     <div className="relative w-full">
-      {/* Background with overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-fashion/30 to-unique/30 z-0"></div>
       
-      {/* Decorative circles */}
       <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-events/20 blur-3xl"></div>
       <div className="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-fashion/20 blur-3xl"></div>
       
@@ -79,13 +119,7 @@ const Hero = () => {
             <Button 
               variant="outline" 
               className="border-2 border-primary/50 hover:bg-primary/10 hover:text-primary px-6 py-6 h-auto text-lg"
-              onClick={() => {
-                // This would use browser geolocation in a real app
-                toast({
-                  title: "Using your location",
-                  description: "Finding rentals near your current location...",
-                });
-              }}
+              onClick={handleUseMyLocation}
             >
               Use My Location 🌍
             </Button>
