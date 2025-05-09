@@ -1,4 +1,3 @@
-
 import { Sparkles } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
@@ -128,7 +127,7 @@ const Categories = () => {
                 <a 
                   onClick={() => handleCategoryClick(item.name)}
                   key={item.name} 
-                  className={`relative category-card bg-${group.color}/10 hover:bg-${group.color}/20 border-2 border-${group.color}/30 hover:border-${group.color} cursor-pointer`}
+                  className="relative category-card aspect-square"
                   style={{ 
                     backgroundColor: `var(--${group.color}, #9b87f5)10`,
                     borderColor: `var(--${group.color}, #9b87f5)30`
@@ -141,7 +140,7 @@ const Categories = () => {
                       className="w-full h-full object-cover opacity-60"
                     />
                   </div>
-                  <div className="mt-auto backdrop-blur-sm bg-white/80 -mx-6 -mb-6 px-6 py-3 border-t border-gray-200 relative z-10">
+                  <div className="mt-auto backdrop-blur-sm bg-white/80 absolute bottom-0 left-0 right-0 px-6 py-3 border-t border-gray-200 z-10">
                     <h4 className="font-semibold">{item.name}</h4>
                   </div>
                 </a>
