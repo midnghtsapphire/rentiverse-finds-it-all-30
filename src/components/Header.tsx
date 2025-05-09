@@ -4,9 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, MapPin } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Header = () => {
   const [location, setLocation] = useState("");
+  const [activeTab, setActiveTab] = useState("search");
   const { toast } = useToast();
 
   const handleSearch = (e?: React.FormEvent) => {
@@ -68,6 +70,23 @@ const Header = () => {
         </div>
         
         <div className="hidden md:flex items-center space-x-4">
+          <Tabs defaultValue="search" value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <TabsList className="bg-muted/50 p-1 rounded-lg mb-2">
+              <TabsTrigger 
+                value="search" 
+                className="data-[state=active]:bg-white data-[state=active]:shadow-sm px-4 py-2 rounded-md"
+              >
+                Search
+              </TabsTrigger>
+              <TabsTrigger 
+                value="browse" 
+                className="data-[state=active]:bg-white data-[state=active]:shadow-sm px-4 py-2 rounded-md"
+              >
+                Browse
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
+
           <form className="relative flex items-center w-96" onSubmit={handleSearch}>
             <div className="absolute left-3 text-gray-400">
               <MapPin size={18} />
@@ -112,8 +131,25 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile search - only visible on small screens */}
+      {/* Mobile view - with proper horizontal tabs */}
       <div className="md:hidden px-4 pb-3">
+        <Tabs defaultValue="search" value={activeTab} onValueChange={setActiveTab} className="w-full mb-2">
+          <TabsList className="w-full bg-muted/50 p-1 rounded-lg flex justify-evenly">
+            <TabsTrigger 
+              value="search" 
+              className="flex-1 data-[state=active]:bg-white data-[state=active]:shadow-sm px-4 py-2 rounded-md"
+            >
+              Search
+            </TabsTrigger>
+            <TabsTrigger 
+              value="browse" 
+              className="flex-1 data-[state=active]:bg-white data-[state=active]:shadow-sm px-4 py-2 rounded-md"
+            >
+              Browse
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
+        
         <form className="relative flex items-center" onSubmit={handleSearch}>
           <div className="absolute left-3 text-gray-400">
             <MapPin size={18} />
