@@ -63,6 +63,13 @@ const FeaturedListings = () => {
     });
   };
 
+  const handleViewAll = () => {
+    toast({
+      title: "View All Rentals",
+      description: "Showing all available rentals in your area.",
+    });
+  };
+
   return (
     <div className="bg-gray-50 py-16">
       <div className="container mx-auto px-4">
@@ -71,7 +78,7 @@ const FeaturedListings = () => {
             <h2 className="text-3xl md:text-4xl font-bold">Featured Rentals</h2>
             <p className="text-gray-600 mt-2">Popular items people are renting right now</p>
           </div>
-          <Button variant="outline" className="hidden md:flex">View All</Button>
+          <Button variant="outline" className="hidden md:flex" onClick={handleViewAll}>View All</Button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -132,7 +139,7 @@ const FeaturedListings = () => {
         </div>
         
         <div className="mt-8 text-center md:hidden">
-          <Button variant="outline">View All Rentals</Button>
+          <Button variant="outline" onClick={handleViewAll}>View All Rentals</Button>
         </div>
       </div>
     </div>
