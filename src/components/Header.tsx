@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, MapPin } from "lucide-react";
+import { Search, MapPin, Menu } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 
 interface HeaderProps {
   onSearch: (term: string) => void;
@@ -65,55 +67,57 @@ const Header = ({ onSearch }: HeaderProps) => {
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center">
-          <h1 className="text-2xl font-bold mr-2">
-            <span className="gradient-text">Rentiverse</span>
-          </h1>
+          <Link to="/" className="flex items-center">
+            <h1 className="text-2xl font-bold mr-2">
+              <span className="gradient-text">Rentiverse</span>
+            </h1>
+          </Link>
           <span className="text-xs bg-fashion/20 text-fashion px-2 py-1 rounded-full">
             beta
           </span>
         </div>
         
         <div className="hidden md:flex items-center space-x-4">
-          <Tabs defaultValue="search" value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="bg-muted/50 p-1 rounded-lg mb-2">
+          <Tabs defaultValue="search" value={activeTab} onValueChange={setActiveTab} className="w-auto">
+            <TabsList className="bg-muted/50 p-1 rounded-lg">
               <TabsTrigger 
                 value="search" 
-                className="data-[state=active]:bg-white data-[state=active]:shadow-sm px-4 py-2 rounded-md"
+                className="data-[state=active]:bg-white data-[state=active]:shadow-sm px-4 py-1.5 rounded-md text-sm"
               >
                 Search
               </TabsTrigger>
               <TabsTrigger 
                 value="browse" 
-                className="data-[state=active]:bg-white data-[state=active]:shadow-sm px-4 py-2 rounded-md"
+                className="data-[state=active]:bg-white data-[state=active]:shadow-sm px-4 py-1.5 rounded-md text-sm"
               >
                 Browse
               </TabsTrigger>
             </TabsList>
           </Tabs>
 
-          <form className="relative flex items-center w-96" onSubmit={handleSearchSubmit}>
+          <form className="relative flex items-center w-80" onSubmit={handleSearchSubmit}>
             <div className="absolute left-3 text-gray-400">
-              <MapPin size={18} />
+              <MapPin size={16} />
             </div>
             <Input 
               type="text" 
-              className="pl-10 pr-4 py-2" 
+              className="pl-9 pr-4 py-2 text-sm h-9" 
               placeholder="Enter ZIP code or city" 
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             />
-            <Button size="sm" type="submit" className="absolute right-1 bg-primary">
-              <Search size={18} />
+            <Button size="icon" variant="ghost" type="submit" className="absolute right-1 h-7 w-7" aria-label="Search rentals">
+              <Search size={16} />
             </Button>
           </form>
-          <Button variant="ghost" onClick={handleUseMyLocation}>
-            <MapPin className="mr-2" /> {/* Added MapPin icon */}
+          <Button variant="ghost" size="sm" onClick={handleUseMyLocation}>
+            <MapPin size={16} className="mr-1.5" />
             Use My Location
           </Button>
         </div>
         
-        <div className="flex items-center space-x-4">
-          <Button variant="outline" className="hidden sm:flex"
+        <div className="hidden md:flex items-center space-x-2">
+          <Button variant="outline" size="sm"
             onClick={() => {
               toast({
                 title: "Sign In",
@@ -123,7 +127,7 @@ const Header = ({ onSearch }: HeaderProps) => {
           >
             Sign In
           </Button>
-          <Button className="bg-primary" 
+          <Button className="bg-primary" size="sm"
             onClick={() => {
               toast({
                 title: "List Your Rental",
@@ -134,11 +138,49 @@ const Header = ({ onSearch }: HeaderProps) => {
             List Your Rental
           </Button>
         </div>
+
+        <div className="md:hidden">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <Menu size={24} />
+                <span className="sr-only">Open menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[280px] sm:w-[320px]">
+              <nav className="flex flex-col space-y-4 mt-8">
+                <SheetClose asChild>
+                  <Button variant="outline" className="w-full justify-start"
+                    onClick={() => {
+                      toast({
+                        title: "Sign In",
+                        description: "Sign in functionality would open here"
+                      });
+                    }}
+                  >
+                    Sign In
+                  </Button>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Button className="bg-primary w-full justify-start" 
+                    onClick={() => {
+                      toast({
+                        title: "List Your Rental",
+                        description: "The rental listing form would open here"
+                      });
+                    }}
+                  >
+                    List Your Rental
+                  </Button>
+                </SheetClose>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
 
-      {/* Mobile view - with proper horizontal tabs */}
-      <div className="md:hidden px-4 pb-3">
-        <Tabs defaultValue="search" value={activeTab} onValueChange={setActiveTab} className="w-full mb-2">
+      <div className="md:hidden px-4 pb-3 border-t border-border md:border-t-0">
+        <Tabs defaultValue="search" value={activeTab} onValueChange={setActiveTab} className="w-full mb-2 pt-3">
           <TabsList className="w-full bg-muted/50 p-1 rounded-lg flex justify-evenly">
             <TabsTrigger 
               value="search" 
@@ -155,29 +197,33 @@ const Header = ({ onSearch }: HeaderProps) => {
           </TabsList>
         </Tabs>
         
-        <form className="relative flex items-center" onSubmit={handleSearchSubmit}>
-          <div className="absolute left-3 text-gray-400">
-            <MapPin size={18} />
-          </div>
-          <Input 
-            type="text" 
-            className="pl-10 pr-4 py-2" 
-            placeholder="Enter ZIP code or city" 
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-          />
-          <Button size="sm" type="submit" className="absolute right-1 bg-primary">
-            <Search size={18} />
-          </Button>
-        </form>
-        <Button 
-          variant="link" 
-          className="text-sm mt-1 w-full justify-center"
-          onClick={handleUseMyLocation}
-        >
-          <MapPin className="mr-2" /> {/* Added MapPin icon */}
-          Use My Location
-        </Button>
+        {activeTab === 'search' && (
+          <>
+            <form className="relative flex items-center mb-2" onSubmit={handleSearchSubmit}>
+              <div className="absolute left-3 text-gray-400">
+                <MapPin size={18} />
+              </div>
+              <Input 
+                type="text" 
+                className="pl-10 pr-4 py-2" 
+                placeholder="Enter ZIP code or city" 
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+              />
+              <Button size="sm" type="submit" className="absolute right-1 bg-primary" aria-label="Search rentals">
+                <Search size={18} />
+              </Button>
+            </form>
+            <Button 
+              variant="link" 
+              className="text-sm w-full justify-center text-primary"
+              onClick={handleUseMyLocation}
+            >
+              <MapPin className="mr-2" />
+              Use My Location
+            </Button>
+          </>
+        )}
       </div>
     </header>
   );
