@@ -1,15 +1,18 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, Sparkles } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
-const Hero = () => {
+interface HeroProps {
+  onSearch: (term: string) => void;
+}
+
+const Hero = ({ onSearch }: HeroProps) => {
   const [zipCode, setZipCode] = useState("");
   const { toast } = useToast();
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (zipCode.trim().length === 0) {
       toast({
@@ -18,7 +21,7 @@ const Hero = () => {
       });
       return;
     }
-    // In a real application, this would trigger a search
+    onSearch(zipCode);
     toast({
       title: "Searching for rentals",
       description: `Finding everything rentable near ${zipCode}`,
@@ -38,6 +41,8 @@ const Hero = () => {
             title: "Location detected",
             description: `Latitude: ${position.coords.latitude.toFixed(2)}, Longitude: ${position.coords.longitude.toFixed(2)}`,
           });
+          // For actual search: onSearch(`lat:${position.coords.latitude},lon:${position.coords.longitude}`);
+          // This would require backend/API to convert coords to location or listings to have coords.
         },
         () => {
           toast({
@@ -95,7 +100,7 @@ const Hero = () => {
             find everything rentable near you.
           </p>
           
-          <form onSubmit={handleSearch} className="max-w-lg mx-auto mb-8">
+          <form onSubmit={handleSearchSubmit} className="max-w-lg mx-auto mb-8">
             <div className="flex">
               <Input 
                 type="text"

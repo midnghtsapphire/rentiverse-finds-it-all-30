@@ -1,4 +1,5 @@
 
+import { useState } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Categories from "@/components/Categories";
@@ -8,13 +9,23 @@ import CallToAction from "@/components/CallToAction";
 import Footer from "@/components/Footer";
 
 const Index = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (term: string) => {
+    setSearchTerm(term.toLowerCase()); // Store search term in lowercase for case-insensitive search
+  };
+
+  const clearSearch = () => {
+    setSearchTerm("");
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Header onSearch={handleSearch} />
       <main>
-        <Hero />
+        <Hero onSearch={handleSearch} />
         <Categories />
-        <FeaturedListings />
+        <FeaturedListings searchTerm={searchTerm} onClearSearch={clearSearch} />
         <HowItWorks />
         <CallToAction />
       </main>

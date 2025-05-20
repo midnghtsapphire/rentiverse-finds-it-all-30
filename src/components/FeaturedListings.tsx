@@ -5,8 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MapPin, Star } from "lucide-react";
 
-// Mock data for featured listings
-const featuredListings = [
+// Mock data for featured listings (kept internal for now)
+const allFeaturedListings = [
   {
     id: 1,
     title: "Professional DSLR Camera Kit",
@@ -53,7 +53,12 @@ const featuredListings = [
   }
 ];
 
-const FeaturedListings = () => {
+interface FeaturedListingsProps {
+  searchTerm?: string;
+  onClearSearch: () => void;
+}
+
+const FeaturedListings = ({ searchTerm, onClearSearch }: FeaturedListingsProps) => {
   const { toast } = useToast();
   
   const handleRentNow = (title: string) => {
@@ -63,12 +68,20 @@ const FeaturedListings = () => {
     });
   };
 
-  const handleViewAll = () => {
+  const handleViewAllClick = () => {
+    onClearSearch();
     toast({
-      title: "View All Rentals",
-      description: "Showing all available rentals in your area.",
+      title: "Showing All Rentals",
+      description: "Displaying all featured rentals.",
     });
   };
+
+  const filteredListings = searchTerm && searchTerm.trim() !== "" 
+    ? allFeaturedListings.filter(listing => 
+        listing.title.toLowerCase().includes(searchTerm) || 
+        listing.location.toLowerCase().includes(searchTerm)
+      )
+    : allFeaturedListings;
 
   return (
     <div className="bg-gray-50 py-16">
@@ -76,70 +89,82 @@ const FeaturedListings = () => {
         <div className="flex justify-between items-center mb-10">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold">Featured Rentals</h2>
-            <p className="text-gray-600 mt-2">Popular items people are renting right now</p>
+            <p className="text-gray-600 mt-2">
+              {searchTerm ? `Showing results for "${searchTerm}"` : "Popular items people are renting right now"}
+            </p>
           </div>
-          <Button variant="outline" className="hidden md:flex" onClick={handleViewAll}>View All</Button>
+          <Button variant="outline" className="hidden md:flex" onClick={handleViewAllClick}>View All</Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {featuredListings.map((listing) => (
-            <Card key={listing.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <div className="relative h-48 overflow-hidden">
-                <img 
-                  src={listing.image} 
-                  alt={listing.title}
-                  className="w-full h-full object-cover"
-                />
-                <Badge 
-                  className={`absolute top-3 left-3`}
-                  style={{ 
-                    backgroundColor: `var(--${listing.categoryColor}, #9b87f5)`
-                  }}
-                >
-                  {listing.category}
-                </Badge>
-              </div>
-              
-              <CardContent className="pt-4">
-                <div className="flex items-center text-sm text-gray-500 mb-2">
-                  <MapPin size={14} className="mr-1" />
-                  <span>{listing.location}</span>
+        {filteredListings.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {filteredListings.map((listing) => (
+              <Card key={listing.id} className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                <div className="relative h-48 overflow-hidden">
+                  <img 
+                    src={listing.image} 
+                    alt={listing.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <Badge 
+                    className={`absolute top-3 left-3`}
+                    style={{ 
+                      backgroundColor: `var(--${listing.categoryColor}, #9b87f5)`
+                    }}
+                  >
+                    {listing.category}
+                  </Badge>
                 </div>
                 
-                <h3 className="font-semibold text-lg mb-1 line-clamp-1">{listing.title}</h3>
-                
-                <div className="flex items-center text-sm mb-2">
-                  <Star size={14} className="text-yellow-500 mr-1" />
-                  <span className="font-medium">{listing.rating}</span>
-                  <span className="text-gray-500 ml-1">({listing.reviews} reviews)</span>
-                </div>
-                
-                <div className="font-bold text-lg">${listing.price}<span className="text-sm font-normal text-gray-500">/day</span></div>
-              </CardContent>
-              
-              <CardFooter className="pt-0">
-                <Button 
-                  onClick={() => handleRentNow(listing.title)}
-                  className="w-full bg-primary hover:bg-primary/90"
-                >
-                  <div className="flex items-center justify-center w-full">
-                    <div className="h-5 w-5 rounded-full overflow-hidden mr-2">
-                      <img 
-                        src={listing.image} 
-                        alt="Thumbnail" 
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                    <span>Rent Now</span>
+                <CardContent className="pt-4">
+                  <div className="flex items-center text-sm text-gray-500 mb-2">
+                    <MapPin size={14} className="mr-1" />
+                    <span>{listing.location}</span>
                   </div>
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
+                  
+                  <h3 className="font-semibold text-lg mb-1 line-clamp-1">{listing.title}</h3>
+                  
+                  <div className="flex items-center text-sm mb-2">
+                    <Star size={14} className="text-yellow-500 mr-1" />
+                    <span className="font-medium">{listing.rating}</span>
+                    <span className="text-gray-500 ml-1">({listing.reviews} reviews)</span>
+                  </div>
+                  
+                  <div className="font-bold text-lg">${listing.price}<span className="text-sm font-normal text-gray-500">/day</span></div>
+                </CardContent>
+                
+                <CardFooter className="pt-0">
+                  <Button 
+                    onClick={() => handleRentNow(listing.title)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <div className="flex items-center justify-center w-full">
+                      <div className="h-5 w-5 rounded-full overflow-hidden mr-2">
+                        <img 
+                          src={listing.image} 
+                          alt="Thumbnail" 
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                      <span>Rent Now</span>
+                    </div>
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-10">
+            <h3 className="text-2xl font-semibold mb-2">No Rentals Found</h3>
+            <p className="text-gray-600 mb-4">
+              We couldn't find any rentals matching "{searchTerm}". Try a different search term or view all rentals.
+            </p>
+            <Button variant="outline" onClick={handleViewAllClick}>View All Rentals</Button>
+          </div>
+        )}
         
         <div className="mt-8 text-center md:hidden">
-          <Button variant="outline" onClick={handleViewAll}>View All Rentals</Button>
+          <Button variant="outline" onClick={handleViewAllClick}>View All Rentals</Button>
         </div>
       </div>
     </div>

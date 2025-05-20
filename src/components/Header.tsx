@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,12 +5,16 @@ import { Search, MapPin } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-const Header = () => {
+interface HeaderProps {
+  onSearch: (term: string) => void;
+}
+
+const Header = ({ onSearch }: HeaderProps) => {
   const [location, setLocation] = useState("");
   const [activeTab, setActiveTab] = useState("search");
   const { toast } = useToast();
 
-  const handleSearch = (e?: React.FormEvent) => {
+  const handleSearchSubmit = (e?: React.FormEvent) => {
     e?.preventDefault();
     if (location.trim().length === 0) {
       toast({
@@ -20,6 +23,7 @@ const Header = () => {
       });
       return;
     }
+    onSearch(location);
     toast({
       title: "Searching for rentals",
       description: `Finding rentals near ${location}...`
@@ -87,7 +91,7 @@ const Header = () => {
             </TabsList>
           </Tabs>
 
-          <form className="relative flex items-center w-96" onSubmit={handleSearch}>
+          <form className="relative flex items-center w-96" onSubmit={handleSearchSubmit}>
             <div className="absolute left-3 text-gray-400">
               <MapPin size={18} />
             </div>
@@ -98,7 +102,7 @@ const Header = () => {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             />
-            <Button size="sm" className="absolute right-1 bg-primary" onClick={() => handleSearch()}>
+            <Button size="sm" type="submit" className="absolute right-1 bg-primary">
               <Search size={18} />
             </Button>
           </form>
@@ -150,7 +154,7 @@ const Header = () => {
           </TabsList>
         </Tabs>
         
-        <form className="relative flex items-center" onSubmit={handleSearch}>
+        <form className="relative flex items-center" onSubmit={handleSearchSubmit}>
           <div className="absolute left-3 text-gray-400">
             <MapPin size={18} />
           </div>
@@ -161,7 +165,7 @@ const Header = () => {
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           />
-          <Button size="sm" className="absolute right-1 bg-primary" onClick={() => handleSearch()}>
+          <Button size="sm" type="submit" className="absolute right-1 bg-primary">
             <Search size={18} />
           </Button>
         </form>
