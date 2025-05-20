@@ -5,13 +5,14 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MapPin, Star } from "lucide-react";
 
-// Mock data for featured listings (kept internal for now)
+// Mock data for featured listings with added zipCode
 const allFeaturedListings = [
   {
     id: 1,
     title: "Professional DSLR Camera Kit",
     category: "Media Gear",
     location: "Seattle, WA",
+    zipCode: "98101", // Added zipCode
     price: 75,
     rating: 4.9,
     reviews: 128,
@@ -23,6 +24,7 @@ const allFeaturedListings = [
     title: "Vintage Wood Farmhouse Table",
     category: "Furniture & Decor",
     location: "Portland, OR",
+    zipCode: "97204", // Added zipCode
     price: 45,
     rating: 4.7,
     reviews: 84,
@@ -34,6 +36,7 @@ const allFeaturedListings = [
     title: "Designer Evening Gown",
     category: "Fashion & Beauty",
     location: "Los Angeles, CA",
+    zipCode: "90012", // Added zipCode
     price: 120,
     rating: 4.8,
     reviews: 57,
@@ -45,6 +48,7 @@ const allFeaturedListings = [
     title: "Friendly Bengal Cat (Per Day)",
     category: "Pets & Animals",
     location: "San Francisco, CA",
+    zipCode: "94102", // Added zipCode
     price: 60,
     rating: 5.0,
     reviews: 42,
@@ -77,10 +81,14 @@ const FeaturedListings = ({ searchTerm, onClearSearch }: FeaturedListingsProps) 
   };
 
   const filteredListings = searchTerm && searchTerm.trim() !== "" 
-    ? allFeaturedListings.filter(listing => 
-        listing.title.toLowerCase().includes(searchTerm) || 
-        listing.location.toLowerCase().includes(searchTerm)
-      )
+    ? allFeaturedListings.filter(listing => {
+        const term = searchTerm.toLowerCase();
+        return (
+          listing.title.toLowerCase().includes(term) || 
+          listing.location.toLowerCase().includes(term) ||
+          (listing.zipCode && listing.zipCode.includes(term)) // Updated filter logic
+        );
+      })
     : allFeaturedListings;
 
   return (
@@ -172,3 +180,4 @@ const FeaturedListings = ({ searchTerm, onClearSearch }: FeaturedListingsProps) 
 };
 
 export default FeaturedListings;
+
