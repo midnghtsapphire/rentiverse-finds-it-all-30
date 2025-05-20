@@ -1,7 +1,8 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Sparkles } from "lucide-react";
+import { Search, Sparkles, MapPin } from "lucide-react"; // Added MapPin
 import { useToast } from "@/components/ui/use-toast";
 
 interface HeroProps {
@@ -126,7 +127,8 @@ const Hero = ({ onSearch }: HeroProps) => {
               className="border-2 border-primary/50 hover:bg-primary/10 hover:text-primary px-6 py-6 h-auto text-lg"
               onClick={handleUseMyLocation}
             >
-              Use My Location 🌍
+              <MapPin className="mr-2" /> {/* Added MapPin icon */}
+              Use My Location
             </Button>
             
             <Button 
@@ -134,7 +136,7 @@ const Hero = ({ onSearch }: HeroProps) => {
               onClick={handleSurpriseMe}
             >
               <Sparkles className="mr-2" />
-              Surprise Me! ✨
+              Surprise Me!
             </Button>
           </div>
         </div>

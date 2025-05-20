@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { Plus, ArrowRight } from "lucide-react"; // Added Plus and ArrowRight
 
 const CallToAction = () => {
   const { toast } = useToast();
@@ -31,6 +32,7 @@ const CallToAction = () => {
               className="bg-white text-fashion hover:bg-white/90 hover:text-fashion px-8 py-6 h-auto text-lg"
               onClick={handleListYourRental}
             >
+              <Plus className="mr-2" /> {/* Added Plus icon */}
               List Your Rental
             </Button>
             
@@ -45,6 +47,7 @@ const CallToAction = () => {
               }}
             >
               Learn More
+              <ArrowRight className="ml-2" /> {/* Added ArrowRight icon */}
             </Button>
           </div>
         </div>

@@ -107,6 +107,7 @@ const Header = ({ onSearch }: HeaderProps) => {
             </Button>
           </form>
           <Button variant="ghost" onClick={handleUseMyLocation}>
+            <MapPin className="mr-2" /> {/* Added MapPin icon */}
             Use My Location
           </Button>
         </div>
@@ -174,6 +175,7 @@ const Header = ({ onSearch }: HeaderProps) => {
           className="text-sm mt-1 w-full justify-center"
           onClick={handleUseMyLocation}
         >
+          <MapPin className="mr-2" /> {/* Added MapPin icon */}
           Use My Location
         </Button>
       </div>
