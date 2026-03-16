@@ -9,8 +9,8 @@
 ## Immediate Agent Tasks
 
 ### Branding & Gateway
-- [ ] Remove all Lovable branding from code and docs.
-- [ ] Update all platform names to GLOW Starlab.
+- [x] Remove all Lovable branding from code and docs.
+- [x] Update all platform names to GLOW Starlab.
 - [ ] Ensure all payment gateway references are Freedom Angel Corps.
 
 ### Documentation
