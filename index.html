@@ -4,27 +4,77 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rentiverse - The Universe of All Things Rentable</title>
+    <title>Rentiverse - Finds It All</title>
     <meta name="description" content="From designer dresses to farm goats, mobile saunas to podcast studios, Rentiverse is the most colorful and comprehensive rental marketplace in existence." />
     <meta name="author" content="Rentiverse" />
 
-    <meta property="og:title" content="Rentiverse - The Universe of All Things Rentable" />
+    <meta property="og:title" content="Rentiverse - Finds It All" />
     <meta property="og:description" content="Find everything you can possibly rent across the United States. Discover thousands of unique rental items near you." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@rentiverse" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-    
+
     <!-- SEO Keywords -->
     <meta name="keywords" content="rent anything, rental marketplace, designer dress rental, equipment rental, peer to peer rental, animal rentals, party rentals, unique rentals near me, rent by zip code, nationwide equipment rental" />
+
+    <!-- Schema.org: Freedom Angel Corp / GlowStarLabs entity hierarchy -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "Freedom Angel Corp",
+          "alternateName": ["GlowStarLabs", "Audrey Evans Official"],
+          "foundingDate": "2010",
+          "founder": {
+            "@type": "Person",
+            "name": "Audrey Evans",
+            "alternateName": "Audrey Walter-Evans",
+            "sameAs": [
+              "https://meetaudreyevans.com",
+              "https://www.linkedin.com/in/audrey-evans-96a56552",
+              "https://github.com/MIDNGHTSAPPHIRE"
+            ]
+          },
+          "taxID": "86-1209156",
+          "nonprofitStatus": "NonprofitType",
+          "memberOf": [
+            {"@type": "Organization", "name": "American Legion", "membershipNumber": "302393962"},
+            {"@type": "Organization", "name": "Project Management Institute", "membershipNumber": "593830"},
+            {"@type": "Organization", "name": "Small Business Administration", "description": "SBA Certified, Zonehub"}
+          ],
+          "slogan": "Home of the Free Because of The Brave",
+          "description": "A minority-owned, veteran-connected, multi-tiered business corporation supporting disabled veterans, at-risk seniors, and underserved communities.",
+          "subOrganization": [
+            {"@type": "Organization", "name": "Angel Reporter LLC", "foundingDate": "2010"},
+            {"@type": "Organization", "name": "XI Website Solutions LLC", "foundingDate": "2010"},
+            {"@type": "Organization", "name": "Evans Digital", "foundingDate": "2010"},
+            {"@type": "Organization", "name": "Fast Macros", "foundingDate": "2010"},
+            {"@type": "Organization", "name": "Spiderwebz Designs", "foundingDate": "2010"}
+          ]
+        },
+        {
+          "@type": "WebApplication",
+          "name": "Rentiverse",
+          "url": "https://rentiverse.glowstarlabs.com",
+          "description": "The universe of all things rentable. Find anything you need, rent it for as long as you want.",
+          "applicationCategory": "RentalMarketplace",
+          "provider": {
+            "@type": "Organization",
+            "name": "Freedom Angel Corp",
+            "foundingDate": "2010",
+            "taxID": "86-1209156"
+          }
+        }
+      ]
+    }
+    </script>
   </head>
 
   <body>
     <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
