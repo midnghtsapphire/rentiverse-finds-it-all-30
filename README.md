@@ -49,3 +49,12 @@ Configure your domain through your hosting provider's dashboard after deployment
 ---
 
 © Freedom Angel Corp / GlowStarLabs. All rights reserved.
+
+---
+
+## Test
+
+| Feature | Status |
+|---------|--------|
+| Feature | ✅ Ready |
+
