@@ -1,5 +1,9 @@
 # Rentiverse — Finds It All
 
+
+<!-- AUTO-PACKAGE-BADGES:START -->
+
+<!-- AUTO-PACKAGE-BADGES:END -->
 A comprehensive rental marketplace built with Vite, TypeScript, React, shadcn-ui, and Tailwind CSS. Find everything you can possibly rent across the United States.
 
 ## Tech Stack
